@@ -3,15 +3,13 @@ import Coffee from "./Coffee";
 
 const masterCoffeeList = [
     {
-        type: "Medium",
+         name: Chiapas,
+         origin: Mexico, 
+         price: 15,
+         roast: medium,
+         sack: [130] 
     },
-    {
-        type: "Dark",
-    },
-    {
-        type: "Light",
-    
-    }
+
 ];
 
 function CoffeeList(){

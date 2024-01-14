@@ -1,11 +1,24 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { v4 } from "uuid";
+
 
 function NewCoffeeForm(props){
-  return (
-    <React.Fragment>
-      <h3>This is a form.</h3>
-    </React.Fragment>
-  );
-}
+    function handleNewTicketFormSubmission(event) {
+        event.preventDefault();
+        props.onNewCoffeeCreation({
+            type: event.target.type.value,
+            id: v4()
+      })
+    }
+    return (
+    <></>   
+      );
+    }
 
-export default NewCoffeeForm;
+    
+    NewCoffeeForm.propTypes = {
+      onNewCoffeeCreation: PropTypes.func
+    }
+    
+    export default NewCoffeeForm;
