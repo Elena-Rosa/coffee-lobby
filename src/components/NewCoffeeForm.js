@@ -4,7 +4,7 @@ import { v4 } from "uuid";
 
 
 function NewCoffeeForm(props){
-    function handleNewTicketFormSubmission(event) {
+    function handleNewCoffeeFormSubmission(event) {
         event.preventDefault();
         props.onNewCoffeeCreation({
             type: event.target.type.value,
@@ -12,7 +12,26 @@ function NewCoffeeForm(props){
       })
     }
     return (
-    <></>   
+        <>
+        <form>
+            <label>
+            Name:
+            <input type="text" name="name" />
+             </label>
+             <label>
+            Origin:
+            <input type="text" name="origin" />
+             </label>
+             <label>
+            Price:
+            <input type="text" name="price" />
+             </label>
+             <label>
+            Roast:
+            <input type="text" name="roast" />
+             </label>
+        </form>
+     </>   
       );
     }
 

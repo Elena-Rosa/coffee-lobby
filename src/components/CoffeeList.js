@@ -3,10 +3,10 @@ import Coffee from "./Coffee";
 
 const masterCoffeeList = [
     {
-         name: Chiapas,
-         origin: Mexico, 
+         name: "Chiapas",
+         origin: "Mexico", 
          price: 15,
-         roast: medium,
+         roast: "medium",
          sack: [130] 
     },
 

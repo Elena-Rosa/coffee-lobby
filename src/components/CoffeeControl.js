@@ -1,14 +1,20 @@
 import React from 'react';
 import NewCoffeeForm from './NewCoffeeForm';
 import CoffeeList from './CoffeeList';
+import CoffeeDetail from './CoffeeDetail';
+import EditCoffeeForm from './EditCoffeeForm';
 
 class CoffeeControl extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-        formVisibleOnPage: false
+        formVisibleOnPage: false,
+        coffeeInput: {name:"", origin:"", price:"", roast:"", sack:[130]},
     };
+  }
+  inputChange = (event) => {
+    const name = event.target.name;
   }
 
   handleClick = () => {

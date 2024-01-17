@@ -15,7 +15,7 @@ function Coffee(props){
   );
 }
 
-Coffee.propTypes = {
+/*Coffee.propTypes = {
   
   name: PropTypes.string.isRequired,
   origin: PropTypes.string.isRequired,
@@ -23,4 +23,5 @@ Coffee.propTypes = {
   roast: PropTypes.string.isRequired,
   sack: PropTypes.array.isRequired
 };
+*/
 export default Coffee;
