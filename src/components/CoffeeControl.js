@@ -68,8 +68,11 @@ class CoffeeControl extends React.Component {
             roast: "medium",
             sack: [130] 
           },
-        ]
-     },
+        ],
+        editing: false,
+        selectedCoffee: null
+     };
+  }
 
   handleClick = () => {
     if (this.state.selectedCoffee != null) {
@@ -92,19 +95,24 @@ class CoffeeControl extends React.Component {
                     formVisibleOnPage: false });
     }
 
-    handleEditingTicket = (editedTicket) => {
-      const editedMainTicketList = this.state.mainTicketList
-        .filter(ticket => ticket.id !== this.state.selectedTicket.id)
-        .concat(editedTicket);
+   const handleEditingCoffeeInList = (coffeeToEdit) => {
+    const editedMasterCoffeeList = this.state.masterCoffeeList
+      .filter(coffee => coffee.id !== this.state.selectedCoffee.id)
+      .concat(coffeeToEdit);
       this.setState({
-        mainTicketList: editedMainTicketList,
+        masterCoffeeList: editedMasterCoffeeList,
         editing: false,
-        selectedTicket: null
-      })
+        selectedCoffee: null
+      });
     }
 
+    const handleEditClick = () => {
+      this.setState({editing: true});
+    }
+  }
 
-  render(){
+
+  render() {
     let currentlyVisibleState = null;
     let buttonText = null;
     if (this.state.formVisibleOnPage) {
@@ -112,7 +120,7 @@ class CoffeeControl extends React.Component {
       buttonText = "Return to Coffee List"; 
     } else {
       currentlyVisibleState = <CoffeeList />;
-      buttonText = "Add Ticket"; 
+      buttonText = "Add Coffee"; 
     }
     return (
       <React.Fragment>
