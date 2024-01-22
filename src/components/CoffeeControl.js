@@ -11,71 +11,79 @@ class CoffeeControl extends React.Component {
     super(props);
     this.state = {
         formVisibleOnPage: false,
-        masterCoffeeList: [
+        selectedCoffee: null,
+        editing: false,
+        mainCoffeeList: [
           {
             name: "Buddas Cup",
             origin: "Mexico", 
             price: 15,
             roast: "medium",
-            sack: [130] 
+            available: 130,
+            id: v4()
           },
           {
             name: "Fire and Smoke",
             origin: "Guatemala", 
             price: 18,
             roast: "dark",
-            sack: [130] 
+            available: 130,
+            id: v4()
           },
           {
             name: "Mi Amor",
             origin: "Colombia", 
             price: 17,
             roast: "medium",
-            sack: [130] 
+            available: 130,
+            id: v4()
           },
           {
             name: "Ethiopia",
             origin: "Ethiopia", 
             price: 15,
             roast: "medium",
-            sack: [130] 
+            available: 130,
+            id: v4()
           },
           {
             name: "Sumatra",
             origin: "Sumatra", 
             price: 15,
             roast: "medium",
-            sack: [130] 
+            available: 130,
+            id: v4()
           },
           {
             name: "Kenya",
             origin: "Kenya", 
             price: 15,
             roast: "medium",
-            sack: [130] 
+            available: 130,
+            id: v4()
           },
           {
             name: "Jayabo Afuera",
             origin: "Dominican Republic", 
             price: 15,
             roast: "medium",
-            sack: [130] 
+            available : 130,
+            id: v4() 
           },
           {
             name: "Giselle",
             origin: "Brazil", 
             price: 15,
             roast: "medium",
-            sack: [130] 
+            available: 130,
+            id: v4() 
           },
         ],
-        editing: false,
-        selectedCoffee: null
      };
   }
 
   handleClick = () => {
-    if (this.state.selectedCoffee != null) {
+    if (this.state.selectedCoffee !== null) {
       this.setState({
         formVisibleOnPage: false,
         selectedCoffee: null,
@@ -89,43 +97,68 @@ class CoffeeControl extends React.Component {
   }
 
   handleNewCoffeeFormSubmission = (newCoffee) => {
-    if (newCoffee.name != null) {
-      newCoffee.id = v4();
-      this.setState({masterCoffeeList: [...this.state.masterCoffeeList, newCoffee],
-                    formVisibleOnPage: false });
+    if (
+      !newCoffee.name ||
+      !newCoffee.name ||
+      !newCoffee.origin ||
+      !newCoffee.roast ||
+      !newCoffee.price 
+    ) {
+      return;
+    }
+    const inputCoffee = {
+      ...newCoffee,
+      quantity: 0,
+      sack: 0,
+      id: v4()
+    };
+
+    this.setState({
+      mainCoffeeList: [...this.state.mainCoffeeList, inputCoffee],
+      formVisibleOnPage: false
+    });
     }
 
-   const handleEditingCoffeeInList = (coffeeToEdit) => {
-    const editedMasterCoffeeList = this.state.masterCoffeeList
+   handleEditingCoffeeInList = (coffeeToEdit) => {
+    const editedMainCoffeeList = this.state.mainCoffeeList
       .filter(coffee => coffee.id !== this.state.selectedCoffee.id)
       .concat(coffeeToEdit);
       this.setState({
-        masterCoffeeList: editedMasterCoffeeList,
+        mainCoffeeList: editedMainCoffeeList,
+        formVisibleOnPage: false,
         editing: false,
         selectedCoffee: null
       });
     }
 
-    const handleEditClick = () => {
-      this.setState({editing: true});
-    }
-  }
+    // handleEditClick = () => {
+    //   this.setState({editing: true});
+    // }
+  };
 
 
-  render() {
+  render(){
     let currentlyVisibleState = null;
     let buttonText = null;
+
     if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewCoffeeForm />;
       buttonText = "Return to Coffee List"; 
+    } else if (this.state.editing) {
+      currentlyVisibleState = <EditCoffeeForm coffee = {this.state.selectedCoffee} onEditCoffee = {this.handleEditingCoffeeInList} />
+      buttonText = "Return to Coffee List";
+    } else if (this.state.selectedCoffee != null) {
+      currentlyVisibleState = <CoffeeDetail coffee = {this.state.selectedCoffee} onClickingDelete = {this.handleDeletingCoffee} onClickingEdit = {this.handleEditClick} />
+      buttonText = "Return to Coffee List";
     } else {
       currentlyVisibleState = <CoffeeList />;
       buttonText = "Add Coffee"; 
     }
+    
     return (
       <React.Fragment>
         {currentlyVisibleState}
-        <button onClick={this.handleClick}>{buttonText}</button> { /* new code */ }
+        <button onClick={this.handleClick}>{buttonText}</button> 
       </React.Fragment>
     );
   }

@@ -8,10 +8,10 @@ function EditCoffeeForm(props) {
   function handleEditFormSubmission(event) {
     event.preventDefault();
     props.onEditCoffee({
-      names: event.target.names.value,
-      location: event.target.location.value,
-      issue: event.target.issue.value,
-      urgency: parseInt(event.target.urgency.value),
+      name: event.target.name.value,
+      origin: event.target.origin.value,
+      roast: event.target.roast.value,
+      price: parseInt(event.target.price.value),
       id: coffee.id
     })
   }
@@ -19,14 +19,14 @@ function EditCoffeeForm(props) {
     <>
       <ReusableForm 
         formSubmissionHandler={handleEditFormSubmission}
-        buttonText="Update Ticket" />
+        buttonText="Coffee" />
     </>
   )
 }
 
 EditCoffeeForm.propTypes = {
-  ticket: PropTypes.object,
-  onEditTicket: PropTypes.func
-}
+  editCoffee: PropTypes.func.isRequired,
+  baseValue: PropTypes.object
+};
 
 export default EditCoffeeForm;
