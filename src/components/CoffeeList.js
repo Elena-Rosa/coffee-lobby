@@ -16,7 +16,7 @@ function CoffeeList(props) {
           roast={coffee.roast}
           id={coffee.id}
           key={coffee.id}
-          coffeeClicked = { props.coffeeSelection }/>
+          coffeeClicked = { coffeeSelection }/>
       )}
     </React.Fragment>
   );

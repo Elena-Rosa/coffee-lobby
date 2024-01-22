@@ -96,9 +96,16 @@ class CoffeeControl extends React.Component {
     }  
   }
 
+  handleCoffeeSelection = (selectedCoffee) => {
+    this.setState({
+      selectedCoffee,
+      formVisibleOnPage: false,
+      editing: false,
+    });
+  }
+
   handleNewCoffeeFormSubmission = (newCoffee) => {
     if (
-      !newCoffee.name ||
       !newCoffee.name ||
       !newCoffee.origin ||
       !newCoffee.roast ||
@@ -131,9 +138,15 @@ class CoffeeControl extends React.Component {
       });
     }
 
-    // handleEditClick = () => {
-    //   this.setState({editing: true});
-    // }
+   handleEditClick = () => {
+       this.setState({editing: true});
+   }
+   handleDeletingCoffee = (id) => {
+    const newMainCoffeeList = this.state.mainCoffeeList.filter(coffee => coffee.id !== id);
+    this.setState({
+      mainCoffeeList: newMainCoffeeList,
+      selectedCoffee: null
+    });
   };
 
 
@@ -148,11 +161,15 @@ class CoffeeControl extends React.Component {
       currentlyVisibleState = <EditCoffeeForm coffee = {this.state.selectedCoffee} onEditCoffee = {this.handleEditingCoffeeInList} />
       buttonText = "Return to Coffee List";
     } else if (this.state.selectedCoffee != null) {
-      currentlyVisibleState = <CoffeeDetail coffee = {this.state.selectedCoffee} onClickingDelete = {this.handleDeletingCoffee} onClickingEdit = {this.handleEditClick} />
-      buttonText = "Return to Coffee List";
+      currentlyVisibleState = (
+        <CoffeeDetail 
+          coffee = {this.state.selectedCoffee} onClickingDelete = {this.handleDeletingCoffee} onClickingEdit = {this.handleEditClick} />
+      );
+          buttonText = "Return to Coffee List";
     } else {
-      currentlyVisibleState = <CoffeeList />;
-      buttonText = "Add Coffee"; 
+          currentlyVisibleState = <CoffeeList coffeeList={this.state.mainCoffeeList} coffeeSelection={this.handleCoffeeSelection} />;
+          buttonText = "Add Coffee";
+
     }
     
     return (
