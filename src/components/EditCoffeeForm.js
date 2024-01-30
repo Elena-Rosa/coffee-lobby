@@ -5,21 +5,23 @@ import ReusableForm from "./ReusableForm";
 function EditCoffeeForm(props) {
   const { coffee } = props;
 
-  function handleEditFormSubmission(event) {
+  function handleEditingCoffeeInList(event) {
     event.preventDefault();
     props.onEditCoffee({
       name: event.target.name.value,
       origin: event.target.origin.value,
       roast: event.target.roast.value,
       price: parseInt(event.target.price.value),
+      available: parseFloat(event.target.available.value),
       id: coffee.id
-    })
+    });
   }
   return (
     <>
       <ReusableForm 
-        formSubmissionHandler={handleEditFormSubmission}
-        buttonText="Coffee" />
+        formSubmissionHandler={handleEditingCoffeeInList}
+        buttonText="Update Coffee"
+        defaultValues={coffee} />
     </>
   )
 }
