@@ -10,11 +10,11 @@ function NewCoffeeForm(props){
         props.onNewCoffeeCreation({
             name: event.target.name.value,
             origin: event.target.origin.value,
-            price: event.target.price.value,
+            price: parseFloat(event.target.price.value),
             roast: event.target.roast.value,
-            available: event.target.available.value,
+            available: parseInt(event.target.available.value),
             id: v4()
-      })
+      });
     }
     return (
         <React.Fragment>

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function ReuseableForm(props) {
   return (
-    <>
+    <React.Fragment>
       <form onSubmit={props.formSubmissionHandler}>
         <input
           type="text"
@@ -29,26 +29,22 @@ function ReuseableForm(props) {
           placeholder="Roast"
           required />
         <br />
-        <label htmlFor="urgency">Tally: </label>
-        <input
-          type="number"
-          name="Tally"
-          min="1"
-          max="10"
-          defaultValue="1"
-          placeholder="Tally"
+        <textarea
+          type="text"
+          name="available"
+          placeholder="Available"
           required />
         <br />
         <button type="submit">{props.buttonText}</button>
       </form>
-    </>
-  )
+    </React.Fragment>
+  );
 }
 
 ReuseableForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
   buttonText: PropTypes.string
-}
+};
 
 
 export default ReuseableForm;

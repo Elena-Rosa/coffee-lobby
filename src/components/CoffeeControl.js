@@ -47,8 +47,8 @@ class CoffeeControl extends React.Component {
             id: v4()
           },
           {
-            name: "Sumatra",
-            origin: "Sumatra", 
+            name: "Sun Bean",
+            origin: "Las Vegas", 
             price: 15,
             roast: "medium",
             available: 130,
@@ -120,10 +120,10 @@ class CoffeeControl extends React.Component {
       id: v4()
     };
 
-    this.setState({
-      mainCoffeeList: [...this.state.mainCoffeeList, inputCoffee],
+    this.setState((prevState) => ({
+      mainCoffeeList: [...prevState.mainCoffeeList, inputCoffee],
       formVisibleOnPage: false
-    });
+    }));
     }
 
    handleEditingCoffeeInList = (coffeeToEdit) => {
@@ -170,7 +170,7 @@ class CoffeeControl extends React.Component {
       buttonText = "Return to Coffee List"; 
     } 
     else if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewCoffeeForm onNewCoffeeCreation={this.handleAddingNewCoffeeToList} />;
+      currentlyVisibleState = <NewCoffeeForm onNewCoffeeCreation={this.handleNewCoffeeFormSubmission} />;
       buttonText = "Return to Coffee List";
     } else {
           currentlyVisibleState = <CoffeeList coffeeList={this.state.mainCoffeeList} oncoffeeSelection={this.handleChangingSelectedCoffee} />;

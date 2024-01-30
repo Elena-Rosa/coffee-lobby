@@ -10,11 +10,12 @@ function CoffeeList(props) {
       <hr />
       {props.coffeeList.map((coffee) => 
         <Coffee
-          whenCoffeeClicked = { props.coffeeSelection }
+          whenCoffeeClicked = { props.oncoffeeSelection }
           name={coffee.name}
           origin={coffee.origin}
           price={coffee.price}
           roast={coffee.roast}
+          available={coffee.available}
           id={coffee.id}
           key={coffee.id}/>
       )}
