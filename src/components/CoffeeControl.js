@@ -166,6 +166,15 @@ class CoffeeControl extends React.Component {
         ...selectedCoffee,
         available: selectedCoffee.available - 1,
       };
+
+      const updatedCoffeeList = mainCoffeeList.map((coffee) =>
+        coffee.id === selectedCoffee.id ? updatedCoffee : coffee
+      );
+
+      this.setState({
+        mainCoffeeList: updatedCoffeeList,
+        selectedCoffee: updatedCoffee,
+      });
     }
 
   };
