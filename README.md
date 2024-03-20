@@ -3,7 +3,7 @@
 #### By: Elena Rosa
 
 ## Description
-This application for tracking coffee. User can add, delete, edit, and sell.
+This application is for tracking coffee. User can add, delete, edit, and sell.
 
 ## Technologies Used
 - React
